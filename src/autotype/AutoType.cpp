@@ -535,7 +535,7 @@ AutoType::parseSequence(const QString& entrySequence, const Entry* entry, QStrin
     // Group 3 = inner placeholder (allows nested placeholders)
     // Group 4 = repeat (opt)
     // Group 5 = character
-    QRegularExpression regex("([+%^]*)({((?>[^{}]+?|(?2))+?)(?:\\s+(\\d+))?})|(.)");
+    QRegularExpression regex("([+%^#]*)(?:({((?>[^{}]+?|(?2))+?)(?:\\s+(\\d+))?})|(.))");
     auto results = regex.globalMatch(sequence);
     while (results.hasNext()) {
         auto match = results.next();
@@ -550,6 +550,9 @@ AutoType::parseSequence(const QString& entrySequence, const Entry* entry, QStrin
         }
         if (match.captured(1).contains('%')) {
             modifiers |= Qt::AltModifier;
+        }
+        if (match.captured(1).contains('#')) {
+            modifiers |= Qt::MetaModifier;
         }
 
         const auto fullPlaceholder = match.captured(2);
