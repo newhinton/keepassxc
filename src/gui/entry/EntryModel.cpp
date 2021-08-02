@@ -392,8 +392,6 @@ QVariant EntryModel::headerData(int section, Qt::Orientation orientation, int ro
             return tr("Attachments");
         case Size:
             return tr("Size");
-        case Color:
-            return tr("Color");
         }
 
     } else if (role == Qt::DecorationRole) {
@@ -404,6 +402,8 @@ QVariant EntryModel::headerData(int section, Qt::Orientation orientation, int ro
             return icons()->icon("chronometer");
         case PasswordStrength:
             return icons()->icon("lock-question");
+        case Color:
+            return icons()->icon("palette-outline");
         }
     } else if (role == Qt::ToolTipRole) {
         switch (section) {
@@ -437,6 +437,8 @@ QVariant EntryModel::headerData(int section, Qt::Orientation orientation, int ro
             return tr("Has attachments");
         case Totp:
             return tr("Has TOTP");
+        case Color:
+            return tr("Color");
         }
     }
 

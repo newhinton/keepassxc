@@ -182,6 +182,7 @@ Files: share/icons/application/scalable/actions/chevron-double-down.svg
        share/icons/application/scalable/actions/password-generator.svg
        share/icons/application/scalable/actions/password-show-off.svg
        share/icons/application/scalable/actions/password-show-on.svg
+       share/icons/application/scalable/actions/palette-outline.svg
        share/icons/application/scalable/actions/refresh.svg
        share/icons/application/scalable/actions/reports.svg
        share/icons/application/scalable/actions/reports-exclude.svg
