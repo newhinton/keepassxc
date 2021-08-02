@@ -451,7 +451,7 @@ QVariant EntryModel::headerData(int section, Qt::Orientation orientation, int ro
         case Totp:
             return tr("Has TOTP");
         case Color:
-            return tr("Color");
+            return tr("Show Backgroundcolor as Box");
         }
     }
 
