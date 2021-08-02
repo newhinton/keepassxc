@@ -393,7 +393,7 @@ QVariant EntryModel::headerData(int section, Qt::Orientation orientation, int ro
         case Size:
             return tr("Size");
         case Color:
-            return tr("Entrycolor");
+            return tr("Color");
         }
 
     } else if (role == Qt::DecorationRole) {
@@ -437,8 +437,6 @@ QVariant EntryModel::headerData(int section, Qt::Orientation orientation, int ro
             return tr("Has attachments");
         case Totp:
             return tr("Has TOTP");
-        case Color:
-            return tr("Entrycolor");
         }
     }
 
