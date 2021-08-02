@@ -318,6 +318,7 @@ bool EntryView::setViewState(const QByteArray& state)
     bool status = header()->restoreState(state);
     resetFixedColumns();
     m_columnsNeedRelayout = state.isEmpty();
+    m_model->setColorVisible(isColumnHidden(EntryModel::Color));
     return status;
 }
 
@@ -357,6 +358,9 @@ void EntryView::toggleColumnVisibility(QAction* action)
     // least one visible column remains, as the table header will disappear
     // entirely when all columns are hidden
     int columnIndex = action->data().toInt();
+    if(columnIndex==EntryModel::Color){
+        m_model->setColorVisible(!action->isChecked());
+    }
     if (action->isChecked()) {
         header()->showSection(columnIndex);
         if (header()->sectionSize(columnIndex) == 0) {
@@ -448,7 +452,6 @@ void EntryView::resetViewToDefaults()
     header()->showSection(EntryModel::Modified);
     header()->showSection(EntryModel::Paperclip);
     header()->showSection(EntryModel::Totp);
-    header()->showSection(EntryModel::Color);
 
     header()->hideSection(EntryModel::Password);
     header()->hideSection(EntryModel::Expires);
@@ -457,6 +460,8 @@ void EntryView::resetViewToDefaults()
     header()->hideSection(EntryModel::Attachments);
     header()->hideSection(EntryModel::Size);
     header()->hideSection(EntryModel::PasswordStrength);
+    header()->hideSection(EntryModel::Color);
+    m_model->setColorVisible(true);
 
     // Reset column order to logical indices
     for (int i = 0; i < header()->count(); ++i) {

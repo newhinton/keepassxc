@@ -578,13 +578,6 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="rowBackgroundColorCheckBox">
-                <property name="text">
-                 <string>Show Background Color of Entry</string>
-                </property>
-               </widget>
-              </item>
-              <item>
                <widget class="QCheckBox" name="minimizeOnCloseCheckBox">
                 <property name="text">
                  <string>Minimize instead of app exit</string>

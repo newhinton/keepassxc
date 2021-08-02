@@ -67,6 +67,7 @@ public:
 
     void setGroup(Group* group);
     void setEntries(const QList<Entry*>& entries);
+    void setColorVisible(bool visible);
 
 private slots:
     void entryAboutToAdd(Entry* entry);
@@ -85,6 +86,7 @@ private:
     void severConnections();
     void makeConnections(const Group* group);
 
+    bool m_colorVisible = true;
     Group* m_group;
     QList<Entry*> m_entries;
     QList<Entry*> m_orgEntries;

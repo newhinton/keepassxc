@@ -235,9 +235,6 @@ void ApplicationSettingsWidget::loadSettings()
     checkUpdatesToggled(m_generalUi->checkForUpdatesOnStartupCheckBox->isChecked());
     m_generalUi->checkForUpdatesIncludeBetasCheckBox->setChecked(
         config()->get(Config::GUI_CheckForUpdatesIncludeBetas).toBool());
-    m_generalUi->rowBackgroundColorCheckBox->setChecked(
-        config()->get(Config::GUI_RowBackgroundColor).toBool());
-
 
     m_generalUi->autoTypeAskCheckBox->setChecked(config()->get(Config::Security_AutoTypeAsk).toBool());
 
@@ -361,8 +358,6 @@ void ApplicationSettingsWidget::saveSettings()
     config()->set(Config::GUI_CheckForUpdates, m_generalUi->checkForUpdatesOnStartupCheckBox->isChecked());
     config()->set(Config::GUI_CheckForUpdatesIncludeBetas,
                   m_generalUi->checkForUpdatesIncludeBetasCheckBox->isChecked());
-    config()->set(Config::GUI_RowBackgroundColor,
-                  m_generalUi->rowBackgroundColorCheckBox->isChecked());
 
     config()->set(Config::Security_AutoTypeAsk, m_generalUi->autoTypeAskCheckBox->isChecked());
 

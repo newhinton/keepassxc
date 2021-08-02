@@ -89,8 +89,7 @@ public:
         GUI_ApplicationTheme,
         GUI_CompactMode,
         GUI_CheckForUpdates,
-            GUI_CheckForUpdatesIncludeBetas,
-        GUI_RowBackgroundColor,
+        GUI_CheckForUpdatesIncludeBetas,
 
         GUI_MainWindowGeometry,
         GUI_MainWindowState,

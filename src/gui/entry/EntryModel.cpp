@@ -20,7 +20,9 @@
 #include <QFont>
 #include <QMimeData>
 #include <QPalette>
+#include <zconf.h>
 
+#include "EntryView.h"
 #include "core/Group.h"
 #include "core/Metadata.h"
 #include "core/PasswordHealth.h"
@@ -295,7 +297,7 @@ QVariant EntryModel::data(const QModelIndex& index, int role) const
             }
             break;
         case PasswordStrength:
-             if (!entry->password().isEmpty() && !entry->excludeFromReports()) {
+            if (!entry->password().isEmpty() && !entry->excludeFromReports()) {
                 StateColorPalette statePalette;
                 QColor color = statePalette.color(StateColorPalette::Error);
 
@@ -344,7 +346,7 @@ QVariant EntryModel::data(const QModelIndex& index, int role) const
             return QVariant(foregroundColor);
         }
     } else if (role == Qt::BackgroundRole) {
-        if (config()->get(Config::GUI_RowBackgroundColor).toBool()) {
+        if (m_colorVisible) {
             QColor backgroundColor;
             backgroundColor.setNamedColor(entry->backgroundColor());
             if (backgroundColor.isValid()) {
@@ -618,4 +620,8 @@ void EntryModel::makeConnections(const Group* group)
     connect(group, SIGNAL(entryAboutToMoveDown(int)), SLOT(entryAboutToMoveDown(int)));
     connect(group, SIGNAL(entryMovedDown()), SLOT(entryMovedDown()));
     connect(group, SIGNAL(entryDataChanged(Entry*)), SLOT(entryDataChanged(Entry*)));
+}
+void EntryModel::setColorVisible(bool visible)
+{
+    m_colorVisible=visible;
 }
