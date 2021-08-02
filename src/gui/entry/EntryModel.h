@@ -47,7 +47,8 @@ public:
         Attachments = 11,
         Totp = 12,
         Size = 13,
-        PasswordStrength = 14
+        PasswordStrength = 14,
+        Color = 15
     };
 
     explicit EntryModel(QObject* parent = nullptr);

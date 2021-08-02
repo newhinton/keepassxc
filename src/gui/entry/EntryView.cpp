@@ -448,6 +448,7 @@ void EntryView::resetViewToDefaults()
     header()->showSection(EntryModel::Modified);
     header()->showSection(EntryModel::Paperclip);
     header()->showSection(EntryModel::Totp);
+    header()->showSection(EntryModel::Color);
 
     header()->hideSection(EntryModel::Password);
     header()->hideSection(EntryModel::Expires);

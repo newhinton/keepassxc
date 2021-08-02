@@ -124,7 +124,7 @@ int EntryModel::columnCount(const QModelIndex& parent) const
         return 0;
     }
 
-    return 15;
+    return 16;
 }
 
 QVariant EntryModel::data(const QModelIndex& index, int role) const
@@ -268,6 +268,8 @@ QVariant EntryModel::data(const QModelIndex& index, int role) const
             return entry->hasTotp();
         case Size:
             return entry->size();
+        case Color:
+            return entry->backgroundColor();
         default:
             // For all other columns, simply use data provided by Qt::Display-
             // Role for sorting
@@ -293,7 +295,7 @@ QVariant EntryModel::data(const QModelIndex& index, int role) const
             }
             break;
         case PasswordStrength:
-            if (!entry->password().isEmpty() && !entry->excludeFromReports()) {
+             if (!entry->password().isEmpty() && !entry->excludeFromReports()) {
                 StateColorPalette statePalette;
                 QColor color = statePalette.color(StateColorPalette::Error);
 
@@ -312,6 +314,13 @@ QVariant EntryModel::data(const QModelIndex& index, int role) const
                 }
 
                 return color;
+            }
+            break;
+        case Color:
+            QColor backgroundColor;
+            backgroundColor.setNamedColor(entry->backgroundColor());
+            if (backgroundColor.isValid()) {
+                return backgroundColor;
             }
             break;
         }
@@ -335,10 +344,12 @@ QVariant EntryModel::data(const QModelIndex& index, int role) const
             return QVariant(foregroundColor);
         }
     } else if (role == Qt::BackgroundRole) {
-        QColor backgroundColor;
-        backgroundColor.setNamedColor(entry->backgroundColor());
-        if (backgroundColor.isValid()) {
-            return QVariant(backgroundColor);
+        if (config()->get(Config::GUI_RowBackgroundColor).toBool()) {
+            QColor backgroundColor;
+            backgroundColor.setNamedColor(entry->backgroundColor());
+            if (backgroundColor.isValid()) {
+                return QVariant(backgroundColor);
+            }
         }
     } else if (role == Qt::ToolTipRole) {
         if (index.column() == PasswordStrength && !entry->password().isEmpty() && !entry->excludeFromReports()) {
@@ -379,6 +390,8 @@ QVariant EntryModel::headerData(int section, Qt::Orientation orientation, int ro
             return tr("Attachments");
         case Size:
             return tr("Size");
+        case Color:
+            return tr("Entrycolor");
         }
 
     } else if (role == Qt::DecorationRole) {
@@ -422,6 +435,8 @@ QVariant EntryModel::headerData(int section, Qt::Orientation orientation, int ro
             return tr("Has attachments");
         case Totp:
             return tr("Has TOTP");
+        case Color:
+            return tr("Entrycolor");
         }
     }
 
