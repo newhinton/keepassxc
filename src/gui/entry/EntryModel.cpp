@@ -333,6 +333,19 @@ QVariant EntryModel::data(const QModelIndex& index, int role) const
         }
         return font;
     } else if (role == Qt::ForegroundRole) {
+
+        if (m_colorVisible) {
+            QColor backgroundColor;
+            backgroundColor.setNamedColor(entry->backgroundColor());
+            int luminance = (0.3*backgroundColor.red()+0.5*backgroundColor.green()+0.15*backgroundColor.blue());
+            if (luminance > 155) {
+                QPalette p;
+                backgroundColor = p.color(QPalette::Current, QPalette::Text);
+                backgroundColor.setHsl(backgroundColor.hue(), backgroundColor.saturation(), 85);
+                return QVariant(backgroundColor);
+            }
+        }
+
         QColor foregroundColor;
         foregroundColor.setNamedColor(entry->foregroundColor());
         if (entry->hasReferences()) {
