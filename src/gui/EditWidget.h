@@ -63,6 +63,9 @@ protected slots:
     void hideMessage();
     void setModified(bool state = true);
     void buttonClicked(QAbstractButton* button);
+    void setButtonStates(bool state);
+    void quicksave();
+
 
 private:
     const QScopedPointer<Ui::EditWidget> m_ui;
