@@ -148,7 +148,6 @@ bool EditWidget::readOnly() const
 
 void EditWidget::setModified(bool state)
 {
-    printf("My name is %d\n", state);
     m_modified = state;
     enableApplyButton(state);
     setButtonStates(state);
@@ -158,12 +157,19 @@ void EditWidget::setButtonStates(bool state){
     QPushButton* okButton = m_ui->buttonBox->button(QDialogButtonBox::Ok);
     QPushButton* applyButton = m_ui->buttonBox->button(QDialogButtonBox::Apply);
     QPushButton* cancelButton = m_ui->buttonBox->button(QDialogButtonBox::Cancel);
-    okButton->setHidden(!state);
-    applyButton->setHidden(!state);
-    if(state){
-        cancelButton->setText(tr("Cancel"));
-    }else{
-        cancelButton->setText(tr("Close"));
+
+    if(okButton){
+        okButton->setHidden(!state);
+    }
+    if(applyButton){
+        applyButton->setHidden(!state);
+    }
+    if(cancelButton){
+        if(state){
+            cancelButton->setText(tr("Cancel"));
+        }else{
+            cancelButton->setText(tr("Close"));
+        }
     }
 }
 
@@ -229,6 +235,6 @@ void EditWidget::quicksave()
         auto *timer = new QTimer(m_ui->buttonBox);
         timer->setSingleShot(true);
         connect(timer, SIGNAL(timeout()),this, SIGNAL(apply()));
-        timer->start(100);
+        timer->start(10);
     }
 }
