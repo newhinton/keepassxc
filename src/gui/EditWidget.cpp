@@ -158,13 +158,20 @@ void EditWidget::setButtonStates(bool state){
     QPushButton* okButton = m_ui->buttonBox->button(QDialogButtonBox::Ok);
     QPushButton* applyButton = m_ui->buttonBox->button(QDialogButtonBox::Apply);
     QPushButton* cancelButton = m_ui->buttonBox->button(QDialogButtonBox::Cancel);
-    okButton->setHidden(!state);
-    applyButton->setHidden(!state);
-    if(state){
-        cancelButton->setText(tr("Cancel"));
-    }else{
-        cancelButton->setText(tr("Close"));
+    if (okButton) {
+        okButton->setHidden(!state);
     }
+    if (applyButton) {
+        applyButton->setHidden(!state);
+    }
+    if (cancelButton) {
+        if(state){
+            cancelButton->setText(tr("Cancel"));
+        }else{
+            cancelButton->setText(tr("Close"));
+        }
+    }
+
 }
 
 bool EditWidget::isModified() const
