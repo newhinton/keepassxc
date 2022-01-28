@@ -236,6 +236,6 @@ void EditWidget::quicksave()
         auto *timer = new QTimer(m_ui->buttonBox);
         timer->setSingleShot(true);
         connect(timer, SIGNAL(timeout()),this, SIGNAL(apply()));
-        timer->start(100);
+        timer->start(10);
     }
 }
